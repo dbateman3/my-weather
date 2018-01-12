@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+const geocode = require('./geocode/geocode.js');
 
 let app = express();
 
@@ -53,6 +54,14 @@ app.post('/getweather', function(req, res) {
 		});
 	} else {
 		console.log('success');
+		let address = req.body.address;
+		geocode.geocodeAddress(address, function(geoError, geoResults) {
+			if(geoError) {
+				//error handling
+			} else {
+
+			}
+		});
 	}
 })
 
