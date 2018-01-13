@@ -1,7 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+
+
 const geocode = require('./geocode/geocode.js');
+const weather = require('./weather/weather.js');
 
 let app = express();
 
@@ -61,9 +64,20 @@ app.post('/getweather', function(req, res) {
 				//error handling
 				console.log(geoError);
 			} else {
-				res.render('index', {
-					address: geoResults.address,
-				});
+				weather.getWeather(geoResults.latitude, geoResults.longitude, function(weatherError, weatherResults) {
+					if(weatherError) {
+						console.log(weatherError);
+					} else {
+						res.render('index', {
+							address: geoResults.address,
+							temperature: weatherResults.temperature,
+							conditions: weatherResults.conditions,
+							windSpeed: weatherResults.windSpeed,
+							thisWeek: weatherResults.thisWeek
+						});
+					}
+				})
+				
 			}
 		});
 	}
