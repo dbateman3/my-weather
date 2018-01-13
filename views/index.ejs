@@ -11,4 +11,7 @@
 			<br>
 			<input type="submit" value="Get Weather">
 		</form>
+		<% if(address) { %>
+			<h2><%= address %></h2>
+		<% }%>
 <%include partials/footer%>

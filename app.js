@@ -35,6 +35,7 @@ app.use(expressValidator({
 // Globals
 app.use(function(req, res, next) {
 	res.locals.errors = null;
+	res.locals.address = null;
 	next();
 });
 
@@ -58,8 +59,11 @@ app.post('/getweather', function(req, res) {
 		geocode.geocodeAddress(address, function(geoError, geoResults) {
 			if(geoError) {
 				//error handling
+				console.log(geoError);
 			} else {
-
+				res.render('index', {
+					address: geoResults.address,
+				});
 			}
 		});
 	}
