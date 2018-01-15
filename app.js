@@ -17,6 +17,9 @@ app.set('views', './views');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+//stylesheets
+app.use('/public', express.static(__dirname + '/public'));
+
 // Validator
 app.use(expressValidator({
 	errorFormatter: function(param, msg, value) {
