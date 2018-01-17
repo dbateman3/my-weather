@@ -1,6 +1,6 @@
 {
   "name": "my-weather",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Weather app",
   "main": "app.js",
   "scripts": {

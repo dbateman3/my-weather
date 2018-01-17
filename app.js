@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { check, validationResult } = require('express-validator/check');
-const { matchedData, sanitize } = require('express-validator/filter');
 
 
 const geocode = require('./geocode/geocode.js');
@@ -36,8 +35,7 @@ app.get('/', function(req, res) {
 
 app.post('/', [
 	check('address')
-		.exists().withMessage('must be valid address')
-		.isLength({min: 5}).withMessage('5 chars min')
+		.isLength({min: 5}).withMessage('Must be a valid address')
 
 
 	], function(req, res, next) {
@@ -53,16 +51,26 @@ app.post('/', [
 		let address = req.body.address;
 		
 		geocode.geocodeAddress(address, function(geoError, geoResults) {
+			
+
 			if(geoError) {
-				//geo error handling
 				console.log(geoError);
+				res.render('index', {
+					errors: [{
+						msg: geoError
+					}],
+				});
 				
 			} else {
 				console.log('no geo error')
 				weather.getWeather(geoResults.latitude, geoResults.longitude, function(weatherError, weatherResults) {
 					if(weatherError) {
-						//weather error handling
 						console.log(weatherError);
+						res.render('index', {
+							errors: [{
+								msg: weatherError
+							}],
+						});
 					} else {
 						console.log('success');
 						res.render('index', {
@@ -73,7 +81,7 @@ app.post('/', [
 							thisWeek: weatherResults.thisWeek
 						});
 					}
-				})
+				});
 				
 			}
 		});
