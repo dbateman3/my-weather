@@ -3,8 +3,8 @@
 	<% include partials/errors %>
 <% } %>
 
-		<h1>This is my weather app!</h1>
-		<form method="post" action="getweather">
+		
+		<form method="post" action="/">
 			<label>Address</label>
 			<br>
 			<input type="text" name="address">
@@ -13,9 +13,9 @@
 		</form>
 		<% if(address) { %>
 			<h2><%= address %></h2>
-			<h3><%= temperature %></h3>
-			<h3><%= conditions %></h3>
-			<h3><%= windSpeed %></h3>
-			<h3><%= thisWeek %></h3>
+			<h3>Temperature: <%= temperature %> degrees F</h3>
+			<h3>Conditions are: <%= conditions %></h3>
+			<h3>Winds are <%= windSpeed %> MPH</h3>
+			<h3>This week: <%= thisWeek %></h3>
 		<% }%>
 <%include partials/footer%>
