@@ -1,12 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { check, validationResult } = require('express-validator/check');
+const compression = require('compression');
 
 
 const geocode = require('./geocode/geocode.js');
 const weather = require('./weather/weather.js');
 
 let app = express();
+
+// Conpress response
+app.use(compression());
 
 
 // View Engine
