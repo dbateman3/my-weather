@@ -92,6 +92,13 @@ app.post('/', [
 	}
 });
 
+// Error 404 handling
+app.use(function(req, res, next) {
+	res.status(404).send('Something broke!');
+});
+
+
+// Start up server
 app.listen(3000, function() {
 	console.log('Server started on port 3000');
 });
