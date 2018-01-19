@@ -2,9 +2,7 @@
 <% include partials/header %>
 <div id="container">
 	<div id="content">
-		<% if(errors) { %>
-			<% include partials/errors %>
-		<% } %>
+		
 
 		<div id="weather-form">		
 			<form method="post" action="/">
@@ -13,13 +11,20 @@
 				<input class="btn-submit" type="submit" value="Get Weather">
 			</form>
 		</div>
+
+		<% if(errors) { %>
+			<% include partials/errors %>
+		<% } %>
+		
 		<% if(address) { %>
 			<div id="weather-stats">
-				<h2><%= address %></h2>
-				<h3>Temperature: <%= temperature %> degrees F</h3>
-				<h3>Conditions are: <%= conditions %></h3>
-				<h3>Winds are <%= windSpeed %> MPH</h3>
-				<h3>This week: <%= thisWeek %></h3>
+				
+				<div id="temp"><%= temperature %>&degF</div>
+				<div id="stats">
+					<div id="cond">Conditions: <%= conditions %></div>
+					<div id="wind">Winds: <%= windSpeed %> mph</div>
+				</div>
+				<div id="weekly"><%= thisWeek %></div>
 			</div>
 		<% }%>
 	</div>
