@@ -7,6 +7,10 @@ const compression = require('compression');
 const geocode = require('./geocode/geocode.js');
 const weather = require('./weather/weather.js');
 
+// Configure port for heroku
+const port = process.env.PORT || 3000;
+
+// init express app
 let app = express();
 
 // Conpress response
@@ -99,6 +103,6 @@ app.use(function(req, res, next) {
 
 
 // Start up server
-app.listen(3000, function() {
-	console.log('Server started on port 3000');
+app.listen(port, function() {
+	console.log(`Server is up on ${port}`);
 });
