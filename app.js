@@ -49,12 +49,10 @@ app.post('/', [
 	], function(req, res, next) {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
-			console.log('Error');
 			res.render('index', {
 			errors: validationResult(req).array(),
 			});
 		} else {
-		console.log('no validation error');
 		
 		let address = req.body.address;
 		
@@ -62,7 +60,6 @@ app.post('/', [
 			
 
 			if(geoError) {
-				console.log(geoError);
 				res.render('index', {
 					errors: [{
 						msg: geoError
@@ -70,17 +67,14 @@ app.post('/', [
 				});
 				
 			} else {
-				console.log('no geo error')
 				weather.getWeather(geoResults.latitude, geoResults.longitude, function(weatherError, weatherResults) {
 					if(weatherError) {
-						console.log(weatherError);
 						res.render('index', {
 							errors: [{
 								msg: weatherError
 							}],
 						});
 					} else {
-						console.log('success');
 						res.render('index', {
 							address: geoResults.address,
 							temperature: weatherResults.temperature,

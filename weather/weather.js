@@ -1,8 +1,14 @@
 const request = require('request');
 
+const weatherKey = require('./weather-key.js');
+
+
+
 let getWeather = function(lat, lng, callback) {
+	let key = weatherKey.getKey();
+
 	request({
-		url: `https://api.darksky.net/forecast/2df076a676988d220ee69dd45e020547/${lat},${lng}`,
+		url: `https://api.darksky.net/forecast/${key}/${lat},${lng}`,
 		json: true,
 
 	}, function(error, response, body) {
